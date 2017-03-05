@@ -1,1 +1,10 @@
 # creative-coding
+* [circles](https://fepegar.github.io/creative-coding/circles)
+* [circlesSplitting](https://fepegar.github.io/creative-coding/circlesSplitting)
+* [ellipses](https://fepegar.github.io/creative-coding/ellipses)
+* [harmonograph](https://fepegar.github.io/creative-coding/harmonograph)
+* [maze](https://fepegar.github.io/creative-coding/maze)
+* [rain](https://fepegar.github.io/creative-coding/rain)
+* [rectangles](https://fepegar.github.io/creative-coding/rectangles)
+* [sponge](https://fepegar.github.io/creative-coding/sponge)
+* [stars](https://fepegar.github.io/creative-coding/stars)
