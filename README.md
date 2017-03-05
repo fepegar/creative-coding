@@ -8,6 +8,7 @@
 * [diffusion](https://fepegar.github.io/creative-coding/diffusion)
 * [ellipses](https://fepegar.github.io/creative-coding/ellipses)
 * [Epicycloid](https://fepegar.github.io/creative-coding/Epicycloid)
+* [fractalTreeRecursive](https://fepegar.github.io/creative-coding/fractalTreeRecursive)
 * [harmonograph](https://fepegar.github.io/creative-coding/harmonograph)
 * [IkedaMap](https://fepegar.github.io/creative-coding/IkedaMap)
 * [maze](https://fepegar.github.io/creative-coding/maze)
