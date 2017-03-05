@@ -1,14 +1,18 @@
-
-var cols, rows;
-var w = 20;
+var N = 30;
+var cols = N;
+var rows = N;
+var w;
 var grid = [];
 var current;
 var stack = [];
 
 function setup() {
-  createCanvas(601, 601);
-  cols = floor(width/w);
-  rows = floor(height/w);
+  // createCanvas(601, 601);
+  var l = min(windowWidth, windowHeight);
+  createCanvas(l, l);
+  // cols = floor(width/w);
+  // rows = floor(height/w);
+  w = width / cols;
 
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
