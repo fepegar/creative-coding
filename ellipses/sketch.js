@@ -19,6 +19,8 @@ function loaded() {
   pieces.push(piece);
   meanColor = piece.color;
   ready = true;
+  clear();
+  piece.draw();
 }
 
 
@@ -71,7 +73,11 @@ function Piece(x, y, width, height) {
   this.draw = function() {
     stroke(this.color);
     fill(this.color);
-    ellipse(this.x + width/2, this.y + height/2, this.width, this.height);
+    ellipse(
+      this.x + (width-2)/2,
+      this.y + (height-2)/2,
+      this.width,
+      this.height);
   }
 
   this.mouseOver = function() {

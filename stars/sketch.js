@@ -40,7 +40,7 @@ function draw() {
 
 
 
-  strokeWeight(maxN/n);
+  strokeWeight(nStars/n);
   translate(width/2, height/2);
   rotate(-PI/2 + rotTheta);
   rotTheta += rotOmega;
