@@ -3,15 +3,19 @@ var im;
 var ready = false;
 var pieces = [];
 var meanColor;
+var show = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  im = loadImage('images/hermanos.jpg', loaded);
+  //im = loadImage('images/hermanos.jpg', loaded);
+  //im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/16473968_1277453392340029_6588372641926006912_n.jpg?oh=0895e81e086f6ecfca867abd7a63d4de&oe=592BE244', loaded);
+  im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/208168_166747070046952_5323033_n.jpg?oh=833f20485d8692e40cc58b774d38be84&oe=59317347', loaded);
+  //im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/12362941_10208211930159729_8239618902904417179_o.jpg?oh=5503faae5f0fb3bf6c4f78ea08cd8140&oe=5933FA6B', loaded);
 }
 
 
 function loaded() {
-  im.resize(600,0)//, 600); // 0);
+  im.resize(0, 600);
   im.loadPixels();
   resizeCanvas(im.width, im.height)
   // var d = 0.95 * min(width, height);
@@ -32,7 +36,12 @@ function draw() {
       noise(frameCount / 100 + 2000)*255)
     return;
   }
-  update();
+  if (show) {
+    print('showing')
+    image(im, 0, 0);
+  } else {
+    update();
+  }
 }
 
 
@@ -45,13 +54,18 @@ function update() {
       var newPieces = onePiece.divide();
       pieces.splice(i, 1);
       pieces = pieces.concat(newPieces);
-      //background(meanColor);
       clear();
-      for (var i = 0; i < pieces.length; i++) {
-        pieces[i].draw();
-      }
+      showAll();
       break;
     }
+  }
+}
+
+
+function showAll() {
+  clear();
+  for (var i = 0; i < pieces.length; i++) {
+    pieces[i].draw();
   }
 }
 
@@ -136,4 +150,16 @@ function getMeanColor(pixels) {
 
 function mean(arr) {
   return arr.reduce(function(a, b) { return a + b; }) / arr.length;
+}
+
+
+function keyPressed() {
+  if (key == 's' || key == 'S') {
+    show = true;
+  }
+}
+
+function keyReleased() {
+  show = false;
+  showAll();
 }

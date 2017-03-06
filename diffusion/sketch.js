@@ -20,7 +20,7 @@ var k = 0.062;
 var N = 100;
 
 function setup() {
-  createCanvas(100, 100);
+  createCanvas(200, 200);
   pixelDensity(1);
   grid = [];
   next = [];
@@ -38,12 +38,24 @@ function setup() {
       };
     }
   }
-
-  for (var i = 50; i < 60; i++) {
-    for (var j = 30; j < 70; j++) {
-      grid[i][j].b = 1;
+  var a = 1;
+  for (var n = 0; n < 10; n++) {
+    var i = floor(random(width));
+    var j = floor(random(height));
+    for(var x = -a; x <= a; x++) {
+      for(var y = -a; y <= a; y++) {
+        if (i+x < 0 || i+x>= width || j+y < 0 || j+y >= height) continue;
+        grid[i+x][j+y].b = 1;
+      }
     }
+
   }
+
+  // for (var i = 50; i < 60; i++) {
+  //   for (var j = 30; j < 70; j++) {
+  //     grid[i][j].b = 1;
+  //   }
+  // }
 
 }
 

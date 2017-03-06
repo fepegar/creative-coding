@@ -19,8 +19,8 @@ function setup() {
       grid.push(new Cell(i, j));
     }
   }
-  // current = grid[floor(random(grid.length))];
-  current = grid[0];
+  current = grid[floor(random(grid.length))];
+  //current = grid[0];
   // frameRate(5);
 }
 
