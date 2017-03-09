@@ -4,13 +4,17 @@ var ready = false;
 var pieces = [];
 var meanColor;
 var show = false;
+var batman = 'https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/208168_166747070046952_5323033_n.jpg?oh=833f20485d8692e40cc58b774d38be84&oe=59317347';
+var hermanos = 'images/hermanos.jpg';
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //im = loadImage('images/hermanos.jpg', loaded);
   //im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/16473968_1277453392340029_6588372641926006912_n.jpg?oh=0895e81e086f6ecfca867abd7a63d4de&oe=592BE244', loaded);
-  im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/208168_166747070046952_5323033_n.jpg?oh=833f20485d8692e40cc58b774d38be84&oe=59317347', loaded);
+  im = loadImage(batman, loaded, failed);
   //im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/12362941_10208211930159729_8239618902904417179_o.jpg?oh=5503faae5f0fb3bf6c4f78ea08cd8140&oe=5933FA6B', loaded);
+
+//https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/12109188_10156658910950517_1464731762818033736_n.jpg?oh=272dc715904a1f38b99a0f279e949bd1&oe=596A531E
 }
 
 
@@ -25,6 +29,12 @@ function loaded() {
   ready = true;
   clear();
   piece.draw();
+}
+
+
+function failed() {
+  print('Failed! Trying', hermanos)
+  im = loadImage(hermanos, loaded);
 }
 
 
