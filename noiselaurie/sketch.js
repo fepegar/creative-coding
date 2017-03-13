@@ -28,32 +28,8 @@ function draw() {
 
 
 function variableEllipse (x,y,px,py) {
-  speed = 5;//+ abs(x-px) + abs(y-py);
+  // speed = abs(x-px) + abs(y-py);
   var diametre = map(mouseX, 0, width, 0, 200);
+  // diametre = speed;
   ellipse(x, y, diametre);
 }
-
-
-
-
-/*
-
-ell
-
-void draw() {
-  // Call the variableEllipse() method and send it the
-  // parameters for the current mouse position
-  // and the previous mouse position
-  variableEllipse(mouseX, mouseY, pmouseX, pmouseY);
-}
-
-
-// The simple method variableEllipse() was created specifically
-// for this program. It calculates the speed of the mouse
-// and draws a small ellipse if the mouse is moving slowly
-// and draws a large ellipse if the mouse is moving quickly
-
-void
-}
-
-*/
