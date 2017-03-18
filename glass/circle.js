@@ -5,11 +5,11 @@ function Circle(center, d, points) {
   this.y = center.y;
   this.d = d;
   this.points = points;
-  this.color = color(
-    random(255),
-    random(255),
-    random(255),
-    100);
+  // this.color = color(
+  //   random(255),
+  //   random(255),
+  //   random(255),
+  //   100);
   this.color = color(255, 0, 0, 50);
 
   this.update = function() {
@@ -40,7 +40,9 @@ function Circle(center, d, points) {
       return undefined;
     }
 
-    if (this.points.length < 128 && this.d > 30) {
+    if (this.points.length < 128 && this.d > 50) {
+      this.upsample();
+    } else if (this.points.length <= 16) {
       this.upsample();
     }
 

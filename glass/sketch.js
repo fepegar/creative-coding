@@ -1,8 +1,7 @@
 
-var n = 1024;
+var n = 64;
 var circles = [];
 var sliderA, sliderS;
-var dir = '/tmp/p5'
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -28,9 +27,6 @@ function draw() {
     circles[i].update();
     circles[i].show();
   }
-  var p = dir + frameCount + ".png";
-  print(p);
-  // saveFrame(p);
 }
 
 // function mouseClicked() {
@@ -52,6 +48,7 @@ function splitCircles() {
     }
   }
   if (circle) {
+
     small = circle.split();
     if (small) {
       circles.splice(foundIdx, 1);
