@@ -39,13 +39,13 @@ function Ball(x, y, d) {
     this.v.add(this.a);
     this.p.add(this.v);
 
-		if(this.p.x >= width) {
+		if(this.p.x >= width && this.v.x > 0) {
 			this.p.x = 0;
-		} else if (this.p.x < 0) {
+		} else if (this.p.x < 0 && this.v.x < 0) {
 			this.p.x = width;
-		} else if (this.p.y >= height) {
+		} else if (this.p.y >= height && this.v.y > 0) {
 			this.p.y = 0;
-		} else if (this.p.y < 0) {
+		} else if (this.p.y < 0 && this.v.y < 0) {
 			this.p.y = height;
 		}
 	}

@@ -8,14 +8,14 @@ var x, y;
 var painting;
 var lineColor;
 
-function setup() { 
+function setup() {
   createCanvas(windowWidth, windowHeight);
   theta = 0;
   omega = 0.05;
   init();
-} 
+}
 
-function draw() { 
+function draw() {
   if(!painting) return;
   //background(220);
   //showFPS()
@@ -48,10 +48,10 @@ function keyTyped() {
     case 'p':
       painting = !painting;
       break;
-  
-    case 'r':
-      clear();
 
+    case 'r':
+      init();
+      painting = true;
       break;
   }
 }
@@ -75,19 +75,4 @@ function init() {
   colorMode(HSB);
   lineColor = color(random(360), random(100), random(25, 70), 100/255.0);
   colorMode(RGB);
-}
-
-
-
-function keyTyped() {
-  switch(key) {
-      
-    case 'p':
-      drawing = !drawing;
-      break;
-      
-    case 'r':
-      init();
-      break;
-  }
 }

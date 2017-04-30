@@ -1,4 +1,3 @@
-var alpha;
 var bg;
 var tClick;
 var theta;
@@ -13,7 +12,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   bg = color(10, 0, 30);
   background(bg);
-  alpha = 0;
   theta = 0;
   dEye = 150;
   LEFT = 0;
