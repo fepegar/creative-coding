@@ -1,7 +1,7 @@
 var temps= 0.03
 
 function setup() {
-  createCanvas(800,600)
+  createCanvas(windowWidth,windowHeight)
   background(0)
   stroke(0, 100);
 }

@@ -1,6 +1,6 @@
 
 var crosses = []
-var numCrosses = 30;
+var numCrosses = 5;
 var gridSize = numCrosses * 3;
 var crossLength;
 var squareLength;
