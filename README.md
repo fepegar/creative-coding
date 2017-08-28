@@ -19,6 +19,7 @@
 * [harmonograph](https://fepegar.github.io/creative-coding/harmonograph)
 * [IkedaMap](https://fepegar.github.io/creative-coding/IkedaMap)
 * [jorge](https://fepegar.github.io/creative-coding/jorge)
+* [lucid-dog](https://fepegar.github.io/creative-coding/lucid-dog)
 * [maze](https://fepegar.github.io/creative-coding/maze)
 * [Moire](https://fepegar.github.io/creative-coding/Moire)
 * [movimiento-armonico](https://fepegar.github.io/creative-coding/movimiento-armonico)
