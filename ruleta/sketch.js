@@ -44,7 +44,7 @@ var FIFTH = [0, 7];
 var PENTATONIC_MAJOR = [0, 2, 4, 7, 9];
 // var PENTATONIC_MINOR = [0, 3, 5, 7, 10];
 
-var grades = MINOR_SCALE;
+var grades = SPANISH;
 
 
 function preload() {
