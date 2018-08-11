@@ -10,6 +10,7 @@ var ry;
 var rPercentage = 0.95;
 var currentCountry;
 var currentIndex;
+var theta;
 
 var attackLevel = 1.0;
 var releaseLevel = 0;
@@ -53,7 +54,6 @@ function preload() {
 
   for(var i = 0; i < filenames.length; i++) {
     filepath = emojisDir + filenames[i];
-    // loadImage(filepath, imageLoaded);
     images.push(loadImage(filepath));
   }
 }
@@ -96,28 +96,33 @@ function draw() {
 
 
 function drawFlags() {
-  var theta;
   var x;
   var y;
   var img;
   var N = images.length;
+  var flagTheta;
   for (var i = 0; i < N; i++) {
     img = images[i];
     imWidth = img.width / scaling;
     imHeight = img.height / scaling;
-    theta = i / N * TAU;
-    x = ry * cos(theta) - imWidth / 2;
-    y = ry * sin(theta) - imHeight / 2;
+    flagTheta = i / N * TAU;
+    x = ry * cos(flagTheta) - imWidth / 2;
+    y = ry * sin(flagTheta) - imHeight / 2;
     image(img, x, y, imWidth, imHeight);
   }
 }
 
 
 function drawHand() {
-  var theta = map(mouseX, 0, width, 0, TAU);
+  var tMouseX = mouseX - width / 2;
+  var tMouseY = mouseY - height / 2;
   var originX = width / 2;
   var originY = height / 2;
   var r = ry;
+  theta = atan2(tMouseY, tMouseX);
+  if (theta < 0) {
+    theta += TAU;
+  }
   var x = r * cos(theta);
   var y = ry * sin(theta);
   stroke(255);
@@ -126,7 +131,8 @@ function drawHand() {
 
 
 function drawLargeFlag()  {
-  currentIndex = Math.round(map(mouseX, 0, width, 0, images.length - 1));
+  // currentIndex = Math.round(map(mouseX, 0, width, 0, images.length - 1));
+  currentIndex = Math.round(map(theta, 0, TAU, 0, images.length - 1));
   var img = images[currentIndex];
   var w = img.width * 2;
   var h = img.height * 2;
