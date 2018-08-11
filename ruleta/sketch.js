@@ -53,7 +53,8 @@ function preload() {
 
   for(var i = 0; i < filenames.length; i++) {
     filepath = emojisDir + filenames[i];
-    loadImage(filepath, imageLoaded);
+    // loadImage(filepath, imageLoaded);
+    images.push(loadImage(filepath));
   }
 }
 
@@ -72,7 +73,7 @@ function setup() {
   env.setADSR(attackTime, decayTime, susPercent, releaseTime);
   env.setRange(attackLevel, releaseLevel);
 
-  triOsc = new p5.Oscillator('triangle');
+  triOsc = new p5.Oscillator('sine');
   triOsc.amp(env);
   triOsc.start();
 
@@ -87,7 +88,6 @@ function setup() {
 
 function draw() {
   background(50);
-  ellipse(mouseX, mouseY, 50);
   translate(width / 2, height / 2);
   drawFlags();
   drawHand();
