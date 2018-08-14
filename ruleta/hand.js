@@ -58,8 +58,7 @@ function Hand(r) {
     this.draw();
   }
 
-  this.impulse = function(seconds) {
-    frames = Math.round(seconds * frameRate());
+  this.addImpulse = function(frames=1) {
     this.impulseLife += frames;
   }
 }
