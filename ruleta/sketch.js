@@ -32,7 +32,7 @@ function imageLoaded(image) {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  ry = 0.95 * height / 2;
+  ry = 0.95 * min(width, height) / 2;
   hand = new Hand(ry);
   setupMusic();
 }
@@ -41,16 +41,30 @@ function draw() {
   background(50);
   translate(width / 2, height / 2);
   drawFlags();
-  checkMouse();
+  // checkMouse();
   hand.update();
   drawLargeFlag();
 }
 
-function checkMouse() {
-  var distanceToCenter = dist(mouseX, mouseY, width/2, height/2)
-  if (distanceToCenter < largeFlagRadius && mouseIsPressed) {
-    hand.addImpulse();
+function inFlag() {
+  var distanceToCenter = dist(mouseX, mouseY, width/2, height/2);
+  return distanceToCenter < largeFlagRadius;
+}
+
+function touchStarted() {
+  if (inFlag()){
+    hand.addImpulses = true;
   }
+}
+
+function touchMoved() {
+  if (!inFlag()){
+    hand.addImpulses = false;
+  }
+}
+
+function touchEnded() {
+  hand.addImpulses = false;
 }
 
 

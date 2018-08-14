@@ -8,6 +8,7 @@ function Hand(r) {
   this.frictionCoefficient = this.alphaImpulse * random(0.05, 0.1);
   this.maxOmega = 0.04;
   this.handWith = 10;
+  this.addImpulses = false;
 
   this.moveMouse = function() {
     var tMouseX = mouseX - width / 2;
@@ -28,6 +29,9 @@ function Hand(r) {
     }
     this.alphaFriction *= this.frictionCoefficient;
 
+    if (this.addImpulses) {
+      this.addImpulse(1);
+    }
     if (this.impulseLife > 0) {
       this.impulseLife--;
       this.omega += this.alphaImpulse;
