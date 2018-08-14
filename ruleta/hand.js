@@ -5,7 +5,9 @@ function Hand(r) {
   this.alphaFriction = 0;
   this.alphaImpulse = random(0.0005, 0.0015);
   this.impulseLife = 0;
-  this.frictionCoefficient = this.alphaImpulse * random(0.15, 0.3);
+  this.frictionCoefficient = this.alphaImpulse * random(0.05, 0.1);
+  this.maxOmega = 0.04;
+  this.handWith = 10;
 
   this.moveMouse = function() {
     var tMouseX = mouseX - width / 2;
@@ -49,7 +51,7 @@ function Hand(r) {
     rotate(this.theta)
     fill(30, 230, 250);
     noStroke();
-    triangle(0, 10, 0, -10, this.r, 0);
+    triangle(0, this.handWith, 0, -this.handWith, this.r, 0);
     rotate(-this.theta)
   }
 
@@ -59,7 +61,7 @@ function Hand(r) {
   }
 
   this.addImpulse = function(frames=1) {
-    if(this.omega < 0.05) {
+    if(this.omega < this.maxOmega) {
       this.impulseLife += frames;
     }
   }

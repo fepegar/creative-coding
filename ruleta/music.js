@@ -57,10 +57,10 @@ function setupMusic () {
     styleSelector.option(styles[i]);
   }
   styleSelector.changed(updateNotes);
-  styleSelector.value('Triad minor');
+  styleSelector.value('Spanish');
 
   tonalitySelector = createSelect();
-  tonalitySelector.position(10, 30);
+  // tonalitySelector.position(10, 30);
   for (var i = 0; i < TONALITIES.length; i++) {
     tonalitySelector.option(TONALITIES[i]);
   }
