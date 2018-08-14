@@ -5,7 +5,7 @@ function Hand(r) {
   this.alphaFriction = 0;
   this.alphaImpulse = 0.001;
   this.impulseLife = 0;
-  this.frictionCoefficient = 0.0001;
+  this.frictionCoefficient = this.alphaImpulse * 0.2;
 
   this.moveMouse = function() {
     var tMouseX = mouseX - width / 2;
@@ -31,6 +31,11 @@ function Hand(r) {
       this.omega += this.alphaImpulse;
     }
     this.omega += this.alphaFriction;
+
+    if (this.omega < 0.0001) {
+      this.omega = 0;
+    }
+
     this.theta += this.omega;
     if (this.theta >= TAU) {
       this.theta -= TAU;
@@ -54,6 +59,7 @@ function Hand(r) {
   }
 
   this.impulse = function(seconds) {
-
+    frames = Math.round(seconds * frameRate());
+    this.impulseLife += frames;
   }
 }
