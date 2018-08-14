@@ -44,6 +44,8 @@ function draw() {
   drawFlags();
   hand.update();
   drawLargeFlag();
+  fill(255);
+  text(Math.round(frameRate()), 0, 200);
 }
 
 function inFlag() {
