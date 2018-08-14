@@ -14,6 +14,7 @@ var MAX_FREQ = 2**octaves * MIN_FREQ;
 var notes = [];
 
 var styleSelector;
+var tonalitySelector;
 
 
 var STYLES_MAP = {
@@ -37,15 +38,47 @@ var STYLES_MAP = {
   "Pentatonic minor": [0, 3, 5, 7, 10],
 }
 
+var TONALITIES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', ];
 
-// var grades = STYLES_MAP['Spanish'];
 
+function setupMusic () {
+  env = new p5.Env();
+  env.setADSR(attackTime, decayTime, susPercent, releaseTime);
+  env.setRange(attackLevel, releaseLevel);
+
+  oscillator = new p5.Oscillator('sine');
+  oscillator.amp(env);
+  oscillator.start();
+
+  styleSelector = createSelect();
+  styleSelector.position(10, 10);
+  styles = Object.keys(STYLES_MAP);
+  for (var i = 0; i < styles.length; i++) {
+    styleSelector.option(styles[i]);
+  }
+  styleSelector.changed(updateNotes);
+  styleSelector.value('Triad minor');
+
+  tonalitySelector = createSelect();
+  tonalitySelector.position(10, 30);
+  for (var i = 0; i < TONALITIES.length; i++) {
+    tonalitySelector.option(TONALITIES[i]);
+  }
+  tonalitySelector.changed(updateNotes);  // TODO
+
+  updateNotes();
+}
+
+
+function updateNotes() {
+  notes = getNotesArray(MIN_FREQ, octaves, STYLES_MAP[styleSelector.value()]);
+}
 
 
 function playEnv() {
   var noteIndex = currentIndex % notes.length;
   var freq = notes[noteIndex];
-  triOsc.freq(freq);
+  oscillator.freq(freq);
   env.play();
 }
 
