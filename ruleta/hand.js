@@ -3,9 +3,9 @@ function Hand(r) {
   this.theta = 0;
   this.omega = 0;
   this.alphaFriction = 0;
-  this.alphaImpulse = 0.001;
+  this.alphaImpulse = random(0.0005, 0.0015);
   this.impulseLife = 0;
-  this.frictionCoefficient = this.alphaImpulse * 0.2;
+  this.frictionCoefficient = this.alphaImpulse * random(0.15, 0.3);
 
   this.moveMouse = function() {
     var tMouseX = mouseX - width / 2;
@@ -59,6 +59,8 @@ function Hand(r) {
   }
 
   this.addImpulse = function(frames=1) {
-    this.impulseLife += frames;
+    if(this.omega < 0.05) {
+      this.impulseLife += frames;
+    }
   }
 }

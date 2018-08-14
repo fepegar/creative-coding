@@ -11,7 +11,7 @@ var currentCountry;
 var currentIndex;
 var theta;
 var hand;
-
+var largeFlagRadius;
 
 
 function preload() {
@@ -37,15 +37,20 @@ function setup() {
   setupMusic();
 }
 
-
-
-
 function draw() {
   background(50);
   translate(width / 2, height / 2);
   drawFlags();
+  checkMouse();
   hand.update();
   drawLargeFlag();
+}
+
+function checkMouse() {
+  var distanceToCenter = dist(mouseX, mouseY, width/2, height/2)
+  if (distanceToCenter < largeFlagRadius && mouseIsPressed) {
+    hand.addImpulse();
+  }
 }
 
 
@@ -71,8 +76,10 @@ function drawLargeFlag()  {
   currentIndex = Math.round(map(hand.theta, 0, TAU, 0, images.length));
   currentIndex = constrain(currentIndex, 0, images.length - 1);
   var img = images[currentIndex];
-  var w = img.width * 2;
-  var h = img.height * 2;
+  var RATIO = 2;
+  var w = img.width * RATIO;
+  var h = img.height * RATIO;
+  largeFlagRadius = w / 2;
   image(img, -w / 2, -h / 2, w, h);
   var oldCountry = currentCountry;
   currentCountry = countries[currentIndex];
