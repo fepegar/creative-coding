@@ -68,7 +68,8 @@ function drawFlags() {
 
 
 function drawLargeFlag()  {
-  currentIndex = Math.round(map(hand.theta, 0, TAU, 0, images.length - 1));
+  currentIndex = Math.round(map(hand.theta, 0, TAU, 0, images.length));
+  currentIndex = constrain(currentIndex, 0, images.length - 1);
   var img = images[currentIndex];
   var w = img.width * 2;
   var h = img.height * 2;
@@ -119,7 +120,7 @@ function Hand(r) {
     }
   }
 
-  this.move = this.movePhysics;
+  this.move = this.moveMouse;
 
   this.draw = function() {
     stroke(255);
