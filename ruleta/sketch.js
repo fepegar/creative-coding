@@ -32,7 +32,8 @@ function imageLoaded(image) {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  ry = 0.95 * min(width, height) / 2;
+  var minSize = min([windowWidth, windowHeight, displayWidth, displayHeight]);
+  ry = 0.95 * minSize / 2;
   hand = new Hand(ry);
   setupMusic();
 }
@@ -41,7 +42,6 @@ function draw() {
   background(50);
   translate(width / 2, height / 2);
   drawFlags();
-  // checkMouse();
   hand.update();
   drawLargeFlag();
 }
@@ -55,16 +55,19 @@ function touchStarted() {
   if (inFlag()){
     hand.addImpulses = true;
   }
+  return false;
 }
 
 function touchMoved() {
   if (!inFlag()){
     hand.addImpulses = false;
   }
+  return false;
 }
 
 function touchEnded() {
   hand.addImpulses = false;
+  return false;
 }
 
 
