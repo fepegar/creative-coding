@@ -39,7 +39,11 @@ function setup() {
 }
 
 function draw() {
-  background(50);
+  if (frameRate() > 55) {
+    background(50);
+  } else {
+    background(100);
+  }
   translate(width / 2, height / 2);
   drawFlags();
   hand.update();
