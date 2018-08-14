@@ -7,11 +7,10 @@ var emojisDir = assetsDir + 'emoji-flags/';
 var scaling = 15;
 var rx;
 var ry;
-var rPercentage = 0.95;
 var currentCountry;
 var currentIndex;
 var theta;
-
+var hand;
 
 
 
@@ -33,43 +32,19 @@ function imageLoaded(image) {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  rx = rPercentage * width / 2;
-  ry = rPercentage * height / 2;
-
-  env = new p5.Env();
-  env.setADSR(attackTime, decayTime, susPercent, releaseTime);
-  env.setRange(attackLevel, releaseLevel);
-
-  triOsc = new p5.Oscillator('sine');
-  triOsc.amp(env);
-  triOsc.start();
-
-  styleSelector = createSelect();
-  styleSelector.position(10, 10);
-  styles = Object.keys(STYLES_MAP);
-  for (var i = 0; i < styles.length; i++) {
-    styleSelector.option(styles[i]);
-  }
-  styleSelector.changed(updateStyle);
-
-  var freq;
-  for (var i = 0; i < images.length; i++) {
-    freq = MIN_FREQ * 2**(i / 12);
-    frequencies.push(freq);
-  }
-  updateStyle();
+  ry = 0.95 * height / 2;
+  hand = new Hand(ry);
+  setupMusic();
 }
 
-function updateStyle() {
-  notes = getNotesArray(MIN_FREQ, octaves, STYLES_MAP[styleSelector.value()]);
-}
+
 
 
 function draw() {
   background(50);
   translate(width / 2, height / 2);
   drawFlags();
-  drawHand();
+  hand.update();
   drawLargeFlag();
 }
 
@@ -92,29 +67,8 @@ function drawFlags() {
 }
 
 
-function drawHand() {
-  var tMouseX = mouseX - width / 2;
-  var tMouseY = mouseY - height / 2;
-  var originX = width / 2;
-  var originY = height / 2;
-  var r = ry;
-  theta = atan2(tMouseY, tMouseX);
-  if (theta < 0) {
-    theta += TAU;
-  }
-  var x = r * cos(theta);
-  var y = ry * sin(theta);
-  stroke(255);
-  rotate(theta)
-  // line(0, 0, x, y);
-  line(0, 0, r, 0);
-  rotate(-theta)
-}
-
-
 function drawLargeFlag()  {
-  // currentIndex = Math.round(map(mouseX, 0, width, 0, images.length - 1));
-  currentIndex = Math.round(map(theta, 0, TAU, 0, images.length - 1));
+  currentIndex = Math.round(map(hand.theta, 0, TAU, 0, images.length - 1));
   var img = images[currentIndex];
   var w = img.width * 2;
   var h = img.height * 2;
@@ -124,5 +78,64 @@ function drawLargeFlag()  {
   if (currentCountry != oldCountry) {
     print(currentCountry);
     playEnv();
+  }
+}
+
+
+
+function Hand(r) {
+  this.r = r;
+  this.theta = 0;
+  this.omega = 0;
+  this.alphaFriction = 0;
+  this.alphaImpulse = 0.001;
+  this.impulseLife = 0;
+  this.frictionCoefficient = 0.0001;
+
+  this.moveMouse = function() {
+    var tMouseX = mouseX - width / 2;
+    var tMouseY = mouseY - height / 2;
+    var originX = width / 2;
+    var originY = height / 2;
+    this.theta = atan2(tMouseY, tMouseX);
+    if (this.theta < 0) {
+      this.theta += TAU;
+    }
+  }
+
+  this.movePhysics = function() {
+    this.alphaFriction = -this.omega;
+    this.alphaFriction /= abs(this.alphaFriction);
+    this.alphaFriction *= this.frictionCoefficient;
+
+    if (this.impulseLife > 0) {
+      this.impulseLife--;
+      this.omega += this.alphaImpulse;
+    }
+    this.omega += this.alphaFriction;
+    this.theta += this.omega;
+    if (this.theta >= TAU) {
+      this.theta -= TAU;
+    }
+  }
+
+  this.move = this.movePhysics;
+
+  this.draw = function() {
+    stroke(255);
+    rotate(this.theta)
+    fill(30, 230, 250);
+    noStroke();
+    triangle(0, 10, 0, -10, this.r, 0);
+    rotate(-this.theta)
+  }
+
+  this.update = function() {
+    this.move();
+    this.draw();
+  }
+
+  this.impulse = function(seconds) {
+
   }
 }
