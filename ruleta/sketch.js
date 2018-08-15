@@ -39,17 +39,12 @@ function setup() {
 }
 
 function draw() {
-  if (frameRate() > 55) {
-    background(50);
-  } else {
-    background(100);
-  }
+  background(50);
   translate(width / 2, height / 2);
   drawFlags();
   hand.update();
   drawLargeFlag();
   fill(255);
-  text(Math.round(frameRate()), 0, 200);
 }
 
 function inFlag() {
