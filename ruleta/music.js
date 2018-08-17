@@ -8,8 +8,8 @@ var releaseTime = 0.2;
 
 var env, triOsc;
 var frequencies = [];
-var MIN_FREQ = 55;
-var octaves = 7;
+var MIN_FREQ = 110;
+var octaves = 6;
 var MAX_FREQ = 2**octaves * MIN_FREQ;
 var notes = [];
 
