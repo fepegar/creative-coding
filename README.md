@@ -1,4 +1,5 @@
 # List of sketches
+* [aoc-2018-05](https://fepegar.github.io/creative-coding/aoc-2018-05)
 * [blend](https://fepegar.github.io/creative-coding/blend)
 * [bubamara](https://fepegar.github.io/creative-coding/bubamara)
 * [Cheshirecat](https://fepegar.github.io/creative-coding/Cheshirecat)
@@ -41,4 +42,5 @@
 * [spongeRecursive](https://fepegar.github.io/creative-coding/spongeRecursive)
 * [stars](https://fepegar.github.io/creative-coding/stars)
 * [Strings](https://fepegar.github.io/creative-coding/Strings)
+* [test_mobile](https://fepegar.github.io/creative-coding/test_mobile)
 * [vertices](https://fepegar.github.io/creative-coding/vertices)
