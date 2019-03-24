@@ -17,6 +17,7 @@ var myFrameCount = 0;
 
 var fps = 30;
 var startMillis;
+var capture = false;
 
 // the canvas capturer instance
 var capturer = new CCapture({ format: 'png', framerate: fps });
@@ -29,8 +30,8 @@ function setup() {
 
   frameRate(fps);
 
-  // start the recording
-  capturer.start();
+  if (capture)
+    capturer.start();
 }
 
 
@@ -53,7 +54,7 @@ function draw() {
   var t = map(elapsed, 0, duration, 0, 1);
 
   // if we have passed t=1 then end the animation.
-  if (t > 1) {
+  if (t > 1 && capture) {
     noLoop();
     console.log('finished recording.');
     capturer.stop();
@@ -65,12 +66,10 @@ function draw() {
   // actually draw
   drawIt();
 
-  // handle saving the frame
-  console.log('capturing frame');
-  capturer.capture(document.getElementById('defaultCanvas0'));
+  if (capture)
+    capturer.capture(document.getElementById('defaultCanvas0'));
 
   myFrameCount++;
-  // saveCanvas('frame' + myFrameCount, 'png');
 }
 
 function drawIt() {
