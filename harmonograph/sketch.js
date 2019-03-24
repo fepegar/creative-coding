@@ -25,7 +25,10 @@ if (capture)
 
 
 function setup() {
-  createCanvas(432, 540);  // saved as double in retina screens
+  if (capture)
+    createCanvas(432, 540);  // saved as double in retina screens
+  else
+    createCanvas(displayWidth, displayHeight);
   init();
   drawIt();
 
