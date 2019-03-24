@@ -20,7 +20,8 @@ var startMillis;
 var capture = false;
 
 // the canvas capturer instance
-var capturer = new CCapture({ format: 'png', framerate: fps });
+if (capture)
+  var capturer = new CCapture({ format: 'png', framerate: fps });
 
 
 function setup() {
