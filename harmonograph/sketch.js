@@ -109,7 +109,7 @@ function drawIt() {
 
 
 function init() {
-  bgColor = color('#900C3f');
+  bgColor = color('#900C3f', 0.1);
   var speed;
   if (capture)
     speed = 15;
@@ -153,11 +153,6 @@ function mouseClicked() {
   drawIt();
 }
 
-
-function touchStarted() {
-  init();
-  drawIt();
-}
 
 
 function colorAlpha(aColor, alpha) {
