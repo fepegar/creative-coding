@@ -15,20 +15,26 @@ var blendModeIdx = 0;
 var drawing = true;
 var myFrameCount = 0;
 
-var fps = 30;
+
 var startMillis;
 var capture = false;
+var fps;
+var capturer;
+
 
 // the canvas capturer instance
-if (capture)
-  var capturer = new CCapture({ format: 'png', framerate: fps });
-
+if (capture) {
+  capturer = new CCapture({ format: 'png', framerate: fps });
+  fps = 30;
+} else {
+  fps = 20;
+}
 
 function setup() {
   if (capture)
     createCanvas(432, 540);  // saved as double in retina screens
   else
-    createCanvas(displayWidth, displayHeight);
+    createCanvas(displayWidth * pixelDensity(), displayHeight * pixelDensity());
   init();
   drawIt();
 
@@ -80,7 +86,13 @@ function drawIt() {
   push();
   translate(width/2, height/2);
   t = 0;
-  var numPoints = 2000;
+
+  var numPoints;
+  if (capture)
+    numPoints = 2000;
+  else
+    numPoints = 1000;
+
   for(i = 0; i < numPoints; i++) {
     x = a[0] * sin(t * f[0] + p[0]) * exp(-d[0] * t) + a[1] * sin(t * f[1] + p[1]) * exp(-d[1] * t);
     y = a[2] * sin(t * f[2] + p[2]) * exp(-d[2] * t) + a[3] * sin(t * f[3] + p[3]) * exp(-d[3] * t);
@@ -98,7 +110,11 @@ function drawIt() {
 
 function init() {
   bgColor = color('#900C3f');
-  speed = 15;
+  var speed;
+  if (capture)
+    speed = 15;
+  else
+    speed = 20;
   lineColor = colorAlpha('#FFC300', 0.8);
   stroke(lineColor);
   dt = speed / 100.0;
@@ -148,7 +164,6 @@ function colorAlpha(aColor, alpha) {
   var c = color(aColor);
   return color('rgba(' +  [red(c), green(c), blue(c), alpha].join(',') + ')');
 }
-
 
 
 function keyTyped() {
