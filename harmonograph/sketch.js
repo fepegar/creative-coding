@@ -20,14 +20,17 @@ var startMillis;
 var capture = false;
 var fps;
 var capturer;
+var power = false;
 
 
 // the canvas capturer instance
 if (capture) {
   capturer = new CCapture({ format: 'png', framerate: fps });
+
+if (capture || power)
   fps = 30;
 } else {
-  fps = 20;
+  fps = 15;
 }
 
 function setup() {
@@ -88,7 +91,7 @@ function drawIt() {
   t = 0;
 
   var numPoints;
-  if (capture)
+  if (capture || power)
     numPoints = 2000;
   else
     numPoints = 1000;
@@ -109,13 +112,13 @@ function drawIt() {
 
 
 function init() {
-  bgColor = color('#900C3f', 0.1);
+  bgColor = colorAlpha('#900C3f', 1);
   var speed;
-  if (capture)
+  if (capture || power)
     speed = 15;
   else
     speed = 20;
-  lineColor = colorAlpha('#FFC300', 0.8);
+  lineColor = colorAlpha('#FFC300', 0.5);
   stroke(lineColor);
   dt = speed / 100.0;
   var smallDim = min(width, height);
