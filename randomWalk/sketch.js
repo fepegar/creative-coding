@@ -42,8 +42,8 @@ function mouseClicked() {
 function Walker(x, y) {
   this.p = createVector(x, y);
   this.v = createVector(0, 0);
-  this.offsetX = random(10000);
-  this.offsetY = random(10000);
+  this.offsetX = random(frameCount);
+  this.offsetY = random(frameCount * 2);
   this.pAnt = this.p.copy();
   this.color = color(
     random(255),
