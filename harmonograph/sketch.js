@@ -16,13 +16,35 @@ var drawing = true;
 var myFrameCount = 0;
 
 
+var startMillis;
+var capture = false;
+var fps;
+var capturer;
+var power = false;
+
+
+// the canvas capturer instance
+if (capture) {
+  capturer = new CCapture({ format: 'png', framerate: fps });
+
+if (capture || power)
+  fps = 30;
+} else {
+  fps = 15;
+}
+
 function setup() {
-  createCanvas(400, 400);
-  BLEND_MODES = [BLEND, ADD, DARKEST, LIGHTEST, DIFFERENCE,
-                   EXCLUSION, MULTIPLY, SCREEN, REPLACE,
-                   OVERLAY, HARD_LIGHT, SOFT_LIGHT, DODGE, BURN];
+  if (capture)
+    createCanvas(432, 540);  // saved as double in retina screens
+  else
+    createCanvas(displayWidth, displayHeight);
   init();
   drawIt();
+
+  frameRate(fps);
+
+  if (capture)
+    capturer.start();
 }
 
 
@@ -30,7 +52,36 @@ function draw() {
   if(!drawing) return;
   background(bgColor);
   addNoise();
+
+  if (startMillis == null) {
+    startMillis = millis();
+  }
+
+  // duration in seconds
+  var seconds = 30;
+  var duration = 1000 * seconds;
+
+  // compute how far we are through the animation as a value
+  // between 0 and 1.
+  var elapsed = millis() - startMillis;
+  var t = map(elapsed, 0, duration, 0, 1);
+
+  // if we have passed t=1 then end the animation.
+  if (t > 1 && capture) {
+    noLoop();
+    console.log('finished recording.');
+    capturer.stop();
+    capturer.save();
+    return;
+    noLoop();
+  }
+
+  // actually draw
   drawIt();
+
+  if (capture)
+    capturer.capture(document.getElementById('defaultCanvas0'));
+
   myFrameCount++;
 }
 
@@ -38,7 +89,14 @@ function drawIt() {
   push();
   translate(width/2, height/2);
   t = 0;
-  for(i = 0; i < 1000; i++) {
+
+  var numPoints;
+  if (capture || power)
+    numPoints = 2000;
+  else
+    numPoints = 1000;
+
+  for(i = 0; i < numPoints; i++) {
     x = a[0] * sin(t * f[0] + p[0]) * exp(-d[0] * t) + a[1] * sin(t * f[1] + p[1]) * exp(-d[1] * t);
     y = a[2] * sin(t * f[2] + p[2]) * exp(-d[2] * t) + a[3] * sin(t * f[3] + p[3]) * exp(-d[3] * t);
 
@@ -54,11 +112,13 @@ function drawIt() {
 
 
 function init() {
-  //blendMode(OVERLAY);
-  bgColor = color('#900C3f');
-  speed = 15;
-  //lineColor = colorAlpha('#FF5733', 0.5);
-  lineColor = colorAlpha('#FFC300', 0.4);
+  bgColor = colorAlpha('#900C3f', 1);
+  var speed;
+  if (capture || power)
+    speed = 15;
+  else
+    speed = 20;
+  lineColor = colorAlpha('#FFC300', 0.5);
   stroke(lineColor);
   dt = speed / 100.0;
   var smallDim = min(width, height);
@@ -94,25 +154,13 @@ function getNoise(amp, t) {
 function mouseClicked() {
   init();
   drawIt();
-  //changeBlendMode();
 }
+
 
 
 function colorAlpha(aColor, alpha) {
   var c = color(aColor);
   return color('rgba(' +  [red(c), green(c), blue(c), alpha].join(',') + ')');
-}
-
-
-function changeBlendMode() {
-  blendModeIdx++;
-  if(blendModeIdx == BLEND_MODES.length) {
-    blendModeIdx = 0;
-  }
-
-  var newBlendMode = BLEND_MODES[blendModeIdx]
-  blendMode(newBlendMode);
-  print('New blend mode: ' + newBlendMode)
 }
 
 
