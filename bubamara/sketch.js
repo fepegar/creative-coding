@@ -83,6 +83,7 @@ function draw() {
   }
 
   clear();
+  background(20, 50, 28)
   strokeWeight(2);
   stroke(0);
   line(0, lineY, width, lineY);
