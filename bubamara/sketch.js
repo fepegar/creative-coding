@@ -62,6 +62,7 @@ function setup() {
 
 
 function draw() {
+  background(20, 50, 28)
   if (!ready) return;
   update();
   t = millis();
@@ -73,17 +74,13 @@ function draw() {
     if (note >= 0) {
       particles.push(new Particle(note, 15));
     }
-
     var noteBass = notesBass[bassIdx++];
     if(noteBass >= 0){
       particles.push(new Particle(notesBass[noteIdx-1], 30));
     }
-
     period *= 0.995;
   }
 
-  clear();
-  background(20, 50, 28)
   strokeWeight(2);
   stroke(0);
   line(0, lineY, width, lineY);

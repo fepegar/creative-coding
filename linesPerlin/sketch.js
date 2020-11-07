@@ -2,12 +2,13 @@ var GRAY;
 var BEIGE;
 var lines = [];
 
-var THICKNESS = 1;
-var NUM_LINES = 10;
-var AMPLITUDE = 30;
+var THICKNESS = 2;
+var NUM_LINES = 5;
+var AMPLITUDE = 50;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  let side = min(windowWidth, windowHeight)
+  createCanvas(side, side);
   GRAY = 50;
   BEIGE = color(240, 240, 170);
   initLines();

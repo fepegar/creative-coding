@@ -5,9 +5,7 @@ var pieces = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //im = loadImage('images/hermanos.jpg', loaded);
-  im = loadImage('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/312803_232244156830576_1666416346_n.jpg?oh=c9cb7056599c371520f6052488fccee3&oe=592B8AE5', loaded);
-
+  im = loadImage('images/hermanos.jpg', loaded);
 }
 
 

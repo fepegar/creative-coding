@@ -4,7 +4,7 @@ from os.path import dirname, realpath, isdir, join
 thisDir = dirname(realpath(__file__))
 fns = os.listdir(thisDir)
 
-with open('.gitignore') as f:
+with open('hide.txt') as f:
     ignore = f.readlines()
 
 ignore = [s.rstrip('\n') for s in ignore]

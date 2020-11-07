@@ -10,7 +10,8 @@ var bgColor;
 var fillColor;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight-50);
+  let smaller = min(windowWidth, windowHeight)
+  createCanvas(smaller, smaller);
   tSeed = random(100000);
   swSeed = random(100000);
   //noFill();
@@ -43,9 +44,9 @@ function draw() {
     x = points[i][0];
     y = points[i][1];
     curveVertex(x, y);
-    //ellipse(x, y, 10);
   }
-  endShape();
+  curveVertex(points[0][0], points[0][1]);
+  endShape(CLOSE);
 
   strokeWeight(0.1);
   line(width/2, 0, width/2, height);

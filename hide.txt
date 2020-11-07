@@ -1,0 +1,4 @@
+barcode
+blend
+rainbow
+riso
