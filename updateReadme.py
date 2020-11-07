@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar  5 18:18:11 2017
-
-@author: fernando
-"""
-
-#%%
-
 import os
 from os.path import dirname, realpath, isdir, join
 
@@ -27,5 +18,5 @@ for folder in fns:
 
 with open('README.md', 'w') as f:
     f.write('# List of sketches\n')
-    for folder in sketches:
+    for folder in sorted(sketches):
         f.write('* [%s](https://fepegar.github.io/creative-coding/%s)\n' % (folder, folder))
