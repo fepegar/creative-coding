@@ -2,6 +2,7 @@ var khakiWeb;
 var oxfordBlue;
 var circles = [];
 var sameInitialSpeed = true;
+var move = true;
 
 
 function setup() {
@@ -84,7 +85,9 @@ function Square(side) {
   }
 
   this.update = function() {
-    this.move();
+    if (move) {
+      this.move();
+    }
     this.draw();
   }
 
