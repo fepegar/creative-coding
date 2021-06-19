@@ -18,5 +18,5 @@ for folder in fns:
 
 with open('README.md', 'w') as f:
     f.write('# List of sketches\n')
-    for folder in sorted(sketches):
+    for folder in sorted(sketches, key=str.casefold):
         f.write('* [%s](https://fepegar.github.io/creative-coding/%s)\n' % (folder, folder))
